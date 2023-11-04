@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <property name="uuid_function" value="gen_random_uuid()" dbms="postgresql"/>
-    <property name="uuid_type" value="uuid" dbms="postgresql"/>
+    <property name="uuid_type" value="varchar(36)" dbms="postgresql"/>
 
 
     <changeSet id="1" author="DA">
@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false"/>
 
             </column>
-            <column type="varchar(255)" name="version">
+            <column type="bigint" name="version">
                 <constraints nullable="false"/>
             </column>
             <column type="varchar(255)" name="title">

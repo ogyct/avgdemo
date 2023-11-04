@@ -1,13 +1,11 @@
 package com.example.demo.posts;
 
 import com.example.demo.common.PageDTO;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.example.demo.common.PageConstants.DEFAULT_PAGE_NUMBER;
 import static com.example.demo.common.PageConstants.DEFAULT_PAGE_SIZE;
@@ -15,6 +13,7 @@ import static com.example.demo.common.PageConstants.DEFAULT_PAGE_SIZE;
 @RestController
 @RequestMapping(value = "/posts", produces = "application/json")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://127.0.0.1:5173", maxAge = 3600)
 public class PostsController {
 
     private final PostRepository postRepository;
@@ -26,6 +25,16 @@ public class PostsController {
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE, required = false) int pageSize,
             @RequestParam(defaultValue = "title", required = false) String sortBy
     ) {
-        return postMapper.map(postRepository.findAll(PageRequest.of(pageNumber, pageSize).withSort(Sort.by(sortBy))));
+        return postMapper.map(
+                postRepository.findAll(
+                        PageRequest.of(pageNumber, pageSize).withSort(Sort.by(sortBy))
+                )
+        );
+    }
+
+    @DeleteMapping("/{publicId}")
+    @Transactional
+    public void deletePost(@PathVariable String publicId) {
+        postRepository.deleteByPublicId(publicId);
     }
 }

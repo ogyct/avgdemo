@@ -12,4 +12,5 @@ public class AbstractEntity {
     private Long id;
     @Version
     private Long version;
+    private String publicId;
 }
