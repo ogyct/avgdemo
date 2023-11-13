@@ -13,7 +13,6 @@ import static com.example.demo.common.PageConstants.DEFAULT_PAGE_SIZE;
 @RestController
 @RequestMapping(value = "/posts", produces = "application/json")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://127.0.0.1:5173", maxAge = 3600)
 public class PostsController {
 
     private final PostRepository postRepository;
