@@ -3,7 +3,7 @@ name: Build Gradle project
 on:
   push:
     branches:
-      - 'master'
+      - 'feature/*'
 
 jobs:
   build-gradle-project:
@@ -18,3 +18,9 @@ jobs:
           java-version: '21'
       - name: Run build with Gradle Wrapper
         run: ./gradlew clean build -x test
+  build-docker-image:
+    needs: 'build-gradle-project'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'build docker image'
+        run: docker build . -t avgdemo
