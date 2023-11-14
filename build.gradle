@@ -12,6 +12,9 @@ group = 'com.example'
 java {
     sourceCompatibility = '21'
 }
+jar {
+    enabled = false
+}
 ext {
     logbookVersion = '3.6.0'
     set('testcontainersVersion', "1.18.0")
