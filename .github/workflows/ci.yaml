@@ -16,11 +16,23 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          cache: 'gradle'
       - name: Run build with Gradle Wrapper
         run: ./gradlew clean build -x test
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: |
+            build/libs
+            Dockerfile
   build-docker-image:
     needs: 'build-gradle-project'
     runs-on: ubuntu-latest
     steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
       - name: 'build docker image'
-        run: docker build . -t avgdemo
+        run: ls -a
