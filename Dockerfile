@@ -1,4 +1,4 @@
-FROM arm64v8/openjdk:22-ea-21
+FROM --platform=linux/amd64 openjdk:21-jdk
 MAINTAINER avgdima
 EXPOSE 8080
 ARG JAR_FILE=build/libs/*.jar
