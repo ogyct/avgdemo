@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: avgdemo-db-stateful-set
+spec:
+  selector:
+    matchLabels:
+      app: avgdemodb
+  serviceName: avgdemodb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: avgdemodb
+    spec:
+      containers:
+        - name: avgdemodb
+          image: postgres:14
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: PGDATA
+              value: '/data/pgdata'
+          volumeMounts:
+            - mountPath: "/data"
+              name: db-pvc
+  volumeClaimTemplates:
+    - metadata:
+        name: db-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+        storageClassName: do-block-storage

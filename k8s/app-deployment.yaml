@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: avgdemo
+  labels:
+    app: avgdemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: avgdemo
+  template:
+    metadata:
+      name: avgdemo
+      labels:
+        app: avgdemo
+    spec:
+      containers:
+        - name: avgdemo
+          image: avgdima/avgdemo:_VERSION_
+          imagePullPolicy: Always
+          readinessProbe:
+            failureThreshold: 4
+            httpGet:
+              port: 8080
+              path: /actuator/health
+          livenessProbe:
+            failureThreshold: 4
+            httpGet:
+              port: 8080
+              path: /actuator/health
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://avgdemodb:5432/avgdemo
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: postgres
+      restartPolicy: Always
