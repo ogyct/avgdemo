@@ -1,5 +1,4 @@
-
-### Run docker compose with DB
+### Run docker compose with DB and with caddy reverse proxy
 
 `docker-compose up`
 
@@ -25,6 +24,10 @@ Build docker image with git commit tag
 - set tunnel `minikube tunnel avgdemo`
 
 `kubectl exec --stdin --tty pod-id -- /bin/bash`
+
+## Prometheus and grafana
+
+See docker compose for info.
 
 ## Digital ocean
 
