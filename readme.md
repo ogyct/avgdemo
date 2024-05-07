@@ -2,6 +2,12 @@
 
 `docker-compose up`
 
+## Release version axion plugin
+
+`./gradlew currentVersion` find current version
+
+`./gradlew release` will increment tag version
+
 Build docker image with git commit tag
 
 `COMMIT=$(git rev-parse --short HEAD)`
