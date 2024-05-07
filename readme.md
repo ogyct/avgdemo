@@ -1,5 +1,8 @@
 ### Run docker compose with DB and with caddy reverse proxy
 
+App uses Caddy as a reverse proxy, so it should be accessible on port 80
+It is enough to run only demoapp via IDE. DB and Caddy will start automatically
+
 `docker-compose up`
 
 ## Release version axion plugin

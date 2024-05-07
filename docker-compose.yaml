@@ -18,6 +18,7 @@ services:
     expose:
       - '8080'
     depends_on:
+      - caddy
       - demo_db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://demo_db:5432/compose-postgres

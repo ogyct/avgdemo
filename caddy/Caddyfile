@@ -1,9 +1,10 @@
-:80 {
-    reverse_proxy host.docker.internal:8080
-}
 {
 	servers {
     	metrics
     }
     admin :2019
 }
+:80 {
+    reverse_proxy demoapp:8080
+}
+
