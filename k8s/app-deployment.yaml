@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: avgdemo
-          image: avgdima/avgdemo:_VERSION_
+          image: avgdima/avgdemo:latest
           imagePullPolicy: Always
           readinessProbe:
             failureThreshold: 4
