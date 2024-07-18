@@ -19,7 +19,7 @@ jar {
 ext {
     logbookVersion = '3.6.0'
     set('testcontainersVersion', "1.18.0")
-
+    archunitVersion = '1.3.0'
 }
 
 configurations {
@@ -36,6 +36,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
@@ -54,9 +56,9 @@ dependencies {
 
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
+    testImplementation "com.tngtech.archunit:archunit:${archunitVersion}"
 
-
-    implementation 'org.zalando:logbook-spring-boot-starter:3.6.0'
+    implementation "org.zalando:logbook-spring-boot-starter:${logbookVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
